@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Stripe AU BECS Direct Debit Sample</title>
+    <meta name="description" content="A demo of Stripe Payment Intents" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="/script.js" defer></script>
+  </head>
+
+  <body>
+    <div class="sr-root">
+      <div class="sr-main">
+        <form id="payment-form" class="sr-payment-form">
+          <div class="sr-combo-inputs-row">
+            <div class="col">
+              <label for="name">
+                Name
+              </label>
+              <input id="name" name="name" placeholder="Jenny Rosen" required />
+            </div>
+            <div class="col">
+              <label for="email">
+                Email Address
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="jenny.rosen@example.com"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="sr-combo-inputs-row">
+            <div class="col">
+              <label for="au-bank-account-element">
+                Bank Account <span id="bank-name"></span>
+              </label>
+              <div id="au-bank-account-element">
+                <!-- A Stripe Element will be inserted here. -->
+              </div>
+            </div>
+          </div>
+          <div id="bank-name"></div>
+
+          <!-- Used to display form errors. -->
+          <div id="error-message" role="alert"></div>
+
+          <div class="checkbox">
+            <label for="agree-to-ddr">
+              <input id="agree-to-ddr" type="checkbox" required />
+              I agree to this Direct Debit Request
+            </label>
+          </div>
+
+          <!-- Display mandate acceptance text. -->
+          <div id="mandate-acceptance">
+            By checking this box, you agree to this Direct Debit Request and the
+            <a
+              href="https://stripe.com/au-becs-dd-service-agreement/legal"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Direct Debit Request service agreement</a
+            >, and authorise Stripe Payments Australia Pty Ltd ACN 160 180 343
+            Direct Debit User ID number 507156 (“Stripe”) to debit your account
+            through the Bulk Electronic Clearing System (BECS) on behalf of
+            Stripe Press (the "Merchant") for any amounts separately
+            communicated to you by the Merchant. You certify that you are either
+            an account holder or an authorised signatory on the account listed
+            above.
+          </div>
+
+          <div class="sr-combo-inputs-row" align="center">
+            <select id="intent-type" class="col" align="center">
+              <option value="payment"
+                >Collect a payment immediately (use PaymentIntent)</option
+              >
+              <option value="setup"
+                >Collect a payment in the future (use SetupIntent)</option
+              >
+            </select>
+          </div>
+
+          <button id="confirm-mandate">
+            <div disabled class="spinner hidden" id="spinner"></div>
+            <span id="button-text" class="payment">
+              <span class="payment"
+                >Confirm mandate and initiate debit for
+                <span id="order-amount"></span>
+              </span>
+              <span class="setup">Confirm mandate for future usage </span>
+            </span>
+          </button>
+        </form>
+        <div class="sr-result hidden">
+          <p>Response<br /></p>
+          <pre>
+            <code></code>
+          </pre>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
