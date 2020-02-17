@@ -89,7 +89,7 @@ body {
 }
 
 /* Inputs */
-input {
+input[type="text"] {
   width: 100%;
   outline: none;
 }
