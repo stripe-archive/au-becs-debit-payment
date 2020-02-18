@@ -5,6 +5,20 @@ const { resolve } = require("path");
 require("dotenv").config({ path: "./.env" });
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
+// For demo purposes we're hardcoding the amount and currency here.
+// Replace this with your cart functionality.
+const cart = {
+  amount: 1099,
+  currency: "AUD"
+};
+
+const createOrder = items => {
+  // Replace this with your order creation logic.
+  // Calculate the order total on the server to prevent
+  // people from directly manipulating the amount on the client.
+  return items;
+};
+
 app.use(express.static(process.env.STATIC_DIR));
 app.use(
   express.json({
@@ -21,8 +35,7 @@ app.use(
 app.get("/config", (req, res) => {
   res.send({
     publicKey: process.env.STRIPE_PUBLISHABLE_KEY,
-    amount: process.env.AMOUNT,
-    currency: process.env.CURRENCY
+    cart
   });
 });
 
@@ -32,19 +45,21 @@ app.get("/", (req, res) => {
   res.sendFile(path);
 });
 
-const calculateOrderAmount = items => {
-  // Replace this constant with a calculation of the order's amount
-  // Calculate the order total on the server to prevent
-  // people from directly manipulating the amount on the client
-  return process.env.AMOUNT;
-};
-
 app.post("/create-payment-intent", async (req, res) => {
-  const { items } = req.body;
+  const { name, email } = req.body;
+  // Create a new customer object so that we can
+  // safe the payment method for future usage.
+  const customer = await stripe.customers.create({
+    name,
+    email
+  });
+
+  const { amount, currency } = createOrder(cart);
   // Create a PaymentIntent with the order amount and currency
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: calculateOrderAmount(items),
-    currency: process.env.CURRENCY,
+    amount,
+    currency,
+    customer: customer.id,
     setup_future_usage: "off_session",
     payment_method_types: ["au_becs_debit"]
   });
@@ -52,18 +67,6 @@ app.post("/create-payment-intent", async (req, res) => {
   // Send PaymentIntent client_secret
   res.send({
     clientSecret: paymentIntent.client_secret
-  });
-});
-
-app.post("/create-setup-intent", async (req, res) => {
-  // Create a SetupIntent to collect a mandate for future payments.
-  const setupIntent = await stripe.setupIntents.create({
-    payment_method_types: ["au_becs_debit"]
-  });
-
-  // Send the SetupIntent client_secret
-  res.send({
-    clientSecret: setupIntent.client_secret
   });
 });
 

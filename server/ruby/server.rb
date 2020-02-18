@@ -10,6 +10,20 @@ set :static, true
 set :public_folder, File.join(File.dirname(__FILE__), ENV['STATIC_DIR'])
 set :port, 4242
 
+# For demo purposes we're hardcoding the amount and currency here.
+# Replace this with your cart functionality.
+cart = {
+  amount: 1099,
+  currency: 'AUD'
+}
+
+def create_order(items)
+  # Replace this with your order creation logic.
+  # Calculate the order total on the server to prevent
+  # people from directly manipulating the amount on the client.
+  items
+end
+
 get '/' do
   # Display checkout page
   content_type 'text/html'
@@ -20,49 +34,34 @@ get '/config' do
   content_type 'application/json'
   {
     publicKey: ENV['STRIPE_PUBLISHABLE_KEY'],
-    amount: ENV['AMOUNT'],
-    currency: ENV['CURRENCY']
+    cart: cart
   }.to_json
-end
-
-def calculate_order_amount(_items)
-  # Replace this constant with a calculation of the order's amount
-  # Calculate the order total on the server to prevent
-  # people from directly manipulating the amount on the client
-  ENV['AMOUNT']
 end
 
 post '/create-payment-intent' do
   content_type 'application/json'
   data = JSON.parse(request.body.read)
 
-  # Create a PaymentIntent with the order amount and currency
+  # Create a new customer object so that we can
+  # safe the payment method for future usage.
+  customer = Stripe::Customer.create({
+    name: data['name'],
+    email: data['email']
+  })
+
+  # Create a PaymentIntent
+  order = create_order(cart)
   payment_intent = Stripe::PaymentIntent.create(
     payment_method_types: ['au_becs_debit'],
     setup_future_usage: 'off_session',
-    amount: calculate_order_amount(data['items']),
-    currency: ENV['CURRENCY']
+    customer: customer[:id],
+    amount: order[:amount],
+    currency: order[:currency]
   )
 
-  # Send publishable key and PaymentIntent details to client
+  # Send the client secret
   {
-    clientSecret: payment_intent['client_secret'],
-    id: payment_intent['id']
-  }.to_json
-end
-
-post '/create-setup-intent' do
-  content_type 'application/json'
-
-  # Create a SetupIntent to collect a mandate for future payments
-  setup_intent = Stripe::SetupIntent.create(
-    payment_method_types: ['au_becs_debit']
-  )
-
-  # Send client_secret back to client
-  {
-    clientSecret: setup_intent['client_secret'],
-    id: setup_intent['id']
+    clientSecret: payment_intent['client_secret']
   }.to_json
 end
 

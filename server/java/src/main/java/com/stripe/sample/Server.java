@@ -16,48 +16,44 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.model.Event;
 import com.stripe.model.PaymentIntent;
-import com.stripe.model.SetupIntent;
+import com.stripe.model.Customer;
 import com.stripe.exception.*;
 import com.stripe.net.Webhook;
 import com.stripe.param.PaymentIntentCreateParams;
-import com.stripe.param.SetupIntentCreateParams;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class Server {
     private static Gson gson = new Gson();
 
-    static class CreatePaymentBody {
-        @SerializedName("items")
-        Object[] items;
+    // For demo purposes we're hardcoding the amount and currency here.
+    // Replace this with your cart functionality.
+    static Map<String, String> cart  = new HashMap<String, String>() {{
+        put("amount", "1099");
+        put("currency", "AUD");
+    }};
 
-        @SerializedName("currency")
-        String currency;
-
-        public Object[] getItems() {
-            return items;
-        }
-
-        public String getCurrency() {
-            return currency;
-        }
-    }
-
-    static class CreateIntentResponse {
-        private String publicKey;
-        private String clientSecret;
-
-        public CreateIntentResponse(String publicKey, String clientSecret) {
-            this.publicKey = publicKey;
-            this.clientSecret = clientSecret;
-        }
-    }
-
-    static Long calculateOrderAmount(Object[] items, Dotenv dotenv) {
-        // Replace this constant with a calculation of the order's amount
+    static Map<String, String> createOrder(Map cart) {
+        // Replace this with your order creation logic.
         // Calculate the order total on the server to prevent
-        // users from directly manipulating the amount on the client
-        return new Long(dotenv.get("AMOUNT"));
+        // people from directly manipulating the amount on the client.
+        return cart;
+    }
+
+    static class CreateRequestBody {
+        @SerializedName("name")
+        String name;
+
+        @SerializedName("email")
+        String email;
+
+        public String getName() {
+            return name;
+        }
+
+        public String getEmail() {
+            return email;
+        }
     }
 
     public static void main(String[] args) {
@@ -74,37 +70,40 @@ public class Server {
 
             Map<String, Object> responseData = new HashMap<>();
             responseData.put("publicKey", dotenv.get("STRIPE_PUBLISHABLE_KEY"));
-            responseData.put("amount", dotenv.get("AMOUNT"));
-            responseData.put("currency", dotenv.get("CURRENCY"));
+            Map<String, Object> nestedParams = new HashMap<>();
+            nestedParams.put("amount", cart.get("amount"));
+            nestedParams.put("currency", cart.get("currency"));
+            responseData.put("cart", nestedParams);
             return gson.toJson(responseData);
         });
 
         post("/create-payment-intent", (request, response) -> {
             response.type("application/json");
 
-            CreatePaymentBody postBody = gson.fromJson(request.body(), CreatePaymentBody.class);
+            CreateRequestBody postBody = gson.fromJson(request.body(), CreateRequestBody.class);
+            // Create a new customer object so that we can
+            // safe the payment method for future usage.
+            Map<String, Object> params = new HashMap<>();
+            params.put("name", postBody.getName());
+            params.put("email", postBody.getEmail());
+
+            Customer customer = Customer.create(params);
+
+            Long amount = new Long(createOrder(cart).get("amount"));
+            String currency = createOrder(cart).get("currency");
             PaymentIntentCreateParams createParams = new PaymentIntentCreateParams.Builder()
                     .addPaymentMethodType("au_becs_debit")
-                    .setCurrency(dotenv.get("CURRENCY"))
-                    .setAmount(calculateOrderAmount(postBody.getItems(), dotenv))
+                    .setCurrency(currency)
+                    .setAmount(amount)
+                    .setCustomer(customer.getId())
                     .setSetupFutureUsage(PaymentIntentCreateParams.SetupFutureUsage.OFF_SESSION)
                     .build();
             // Create a PaymentIntent with the order amount and currency
             PaymentIntent intent = PaymentIntent.create(createParams);
-            // Send publishable key and PaymentIntent details to client
-            return gson.toJson(new CreateIntentResponse(dotenv.get("STRIPE_PUBLISHABLE_KEY"), intent.getClientSecret()));
-        });
-
-        post("/create-setup-intent", (request, response) -> {
-            response.type("application/json");
-
-            SetupIntentCreateParams createParams = new SetupIntentCreateParams.Builder()
-                    .addPaymentMethodType("au_becs_debit")
-                    .build();
-            // Create a SetupIntent for future usage
-            SetupIntent intent = SetupIntent.create(createParams);
-            // Send publishable key and PaymentIntent details to client
-            return gson.toJson(new CreateIntentResponse(dotenv.get("STRIPE_PUBLISHABLE_KEY"), intent.getClientSecret()));
+            // Send the client secret to the client
+            Map<String, Object> responseData = new HashMap<>();
+            responseData.put("clientSecret", intent.getClientSecret());
+            return gson.toJson(responseData);
         });
 
         post("/webhook", (request, response) -> {

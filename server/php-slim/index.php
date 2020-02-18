@@ -16,6 +16,18 @@ if (PHP_SAPI == 'cli-server') {
 
 $app = new \Slim\App;
 
+// For demo purposes we're hardcoding the amount and currency here.
+// Replace this with your cart functionality.
+$cart = ['amount' => 1099, 'currency' => 'AUD'];
+
+function createOrder($items)
+{
+  // Replace this with your order creation logic.
+  // Calculate the order total on the server to prevent
+  // people from directly manipulating the amount on the client.
+  return $items;
+}
+
 // Instantiate the logger as a dependency
 $container = $app->getContainer();
 $container['logger'] = function ($c) {
@@ -36,48 +48,37 @@ $app->get('/', function (Request $request, Response $response, array $args) {
   return $response->write(file_get_contents(getenv('STATIC_DIR') . '/index.html'));
 });
 
-function calculateOrderAmount($items)
-{
-  // Replace this constant with a calculation of the order's amount
-  // Calculate the order total on the server to prevent
-  // people from directly manipulating the amount on the client
-  return getenv('AMOUNT');
-}
-
 $app->get('/config', function (Request $request, Response $response, array $args) {
+  global $cart;
   $pub_key = getenv('STRIPE_PUBLISHABLE_KEY');
-  $amount = getenv('AMOUNT');
-  $currency = getenv('CURRENCY');
   return $response->withJson([ 
     'publicKey' => $pub_key, 
-    'amount' => $amount, 
-    'currency' => $currency 
+    'cart' => $cart
   ]);
 });
 
 $app->post('/create-payment-intent', function (Request $request, Response $response, array $args) {
     $body = json_decode($request->getBody());
+    // Create a new customer object so that we can
+    // safe the payment method for future usage.
+    $customer = \Stripe\Customer::create([
+      'name' => $body->name,
+      'email' => $body->email
+    ]);
 
-    // Create a PaymentIntent with the order amount and currency
+    // Create a PaymentIntent
+    global $cart;
+    $order = createOrder($cart);
     $payment_intent = \Stripe\PaymentIntent::create([
       'payment_method_types' => ['au_becs_debit'],
       'setup_future_usage' => 'off_session',
-      'amount' => calculateOrderAmount($body->items),
-      'currency' => getenv('CURRENCY')
+      'customer' => $customer->id,
+      'amount' => $order['amount'],
+      'currency' => $order['currency']
     ]);
     
     // Send publishable key and PaymentIntent details to client
     return $response->withJson(array('clientSecret' => $payment_intent->client_secret));
-});
-
-$app->post('/create-setup-intent', function (Request $request, Response $response, array $args) {
-    // Create a SetupIntent to collect a mandate for future payments.
-    $setup_intent = \Stripe\PaymentIntent::create([
-      'payment_method_types' => ['au_becs_debit']
-    ]);
-    
-    // Send publishable key and PaymentIntent details to client
-    return $response->withJson(array('clientSecret' => $setup_intent->client_secret));
 });
 
 $app->post('/webhook', function(Request $request, Response $response) {

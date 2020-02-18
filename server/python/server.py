@@ -23,6 +23,20 @@ static_dir = str(os.path.abspath(os.path.join(
 app = Flask(__name__, static_folder=static_dir,
             static_url_path='', template_folder=static_dir)
 
+# For demo purposes we're hardcoding the amount and currency here.
+# Replace this with your cart functionality.
+cart = {
+    'amount': 1099,
+    'currency': 'AUD'
+}
+
+
+def create_order(items):
+    # Replace this with your order creation logic.
+    # Calculate the order total on the server to prevent
+    # people from directly manipulating the amount on the client.
+    return items
+
 
 @app.route('/', methods=['GET'])
 def get_checkout_page():
@@ -34,45 +48,32 @@ def get_checkout_page():
 def get_PUBLISHABLE_KEY():
     return jsonify({
         'publicKey': os.getenv('STRIPE_PUBLISHABLE_KEY'),
-        'amount': os.getenv('AMOUNT'),
-        'currency': os.getenv('CURRENCY')
+        'cart': cart
     })
-
-
-def calculate_order_amount(items):
-    # Replace this constant with a calculation of the order's amount
-    # Calculate the order total on the server to prevent
-    # people from directly manipulating the amount on the client
-    return os.getenv('AMOUNT')
 
 
 @app.route('/create-payment-intent', methods=['POST'])
 def create_payment():
     data = json.loads(request.data)
-    # Create a PaymentIntent with the order amount and currency
+    # Create a new customer object so that we can
+    # safe the payment method for future usage.
+    customer = stripe.Customer.create(
+        name=data['name'],
+        email=data['email']
+    )
+
+    # Create a PaymentIntent
+    order = create_order(cart)
     intent = stripe.PaymentIntent.create(
         payment_method_types=['au_becs_debit'],
         setup_future_usage='off_session',
-        amount=calculate_order_amount(data['items']),
-        currency=os.getenv('CURRENCY')
+        customer=customer['id'],
+        amount=order['amount'],
+        currency=order['currency']
     )
 
     try:
         # Send publishable key and PaymentIntent details to client
-        return jsonify({'clientSecret': intent.client_secret})
-    except Exception as e:
-        return jsonify(error=str(e)), 403
-
-
-@app.route('/create-setup-intent', methods=['POST'])
-def create_setup():
-    # Create a SetupIntent to collect a mandate for future payments.
-    intent = stripe.SetupIntent.create(
-        payment_method_types=['au_becs_debit']
-    )
-
-    try:
-        # SetupIntent client-secret
         return jsonify({'clientSecret': intent.client_secret})
     except Exception as e:
         return jsonify(error=str(e)), 403

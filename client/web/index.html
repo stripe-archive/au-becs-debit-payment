@@ -59,16 +59,10 @@
           <!-- Used to display form errors. -->
           <div id="error-message" role="alert"></div>
 
-          <div class="checkbox">
-            <label for="agree-to-ddr">
-              <input id="agree-to-ddr" type="checkbox" required />
-              I agree to this Direct Debit Request
-            </label>
-          </div>
-
           <!-- Display mandate acceptance text. -->
-          <div id="mandate-acceptance">
-            By checking this box, you agree to this Direct Debit Request and the
+          <div class="col" id="mandate-acceptance">
+            By providing your bank account details and confirming this payment,
+            you agree to this Direct Debit Request and the
             <a
               href="https://stripe.com/au-becs-dd-service-agreement/legal"
               target="_blank"
@@ -83,17 +77,6 @@
             above.
           </div>
 
-          <div class="sr-combo-inputs-row" align="center">
-            <select id="intent-type" class="col" align="center">
-              <option value="payment"
-                >Collect a payment immediately (use PaymentIntent)</option
-              >
-              <option value="setup"
-                >Collect a payment in the future (use SetupIntent)</option
-              >
-            </select>
-          </div>
-
           <button id="confirm-mandate">
             <div disabled class="spinner hidden" id="spinner"></div>
             <span id="button-text" class="payment">
@@ -101,7 +84,6 @@
                 >Confirm mandate and initiate debit for
                 <span id="order-amount"></span>
               </span>
-              <span class="setup">Confirm mandate for future usage </span>
             </span>
           </button>
         </form>
