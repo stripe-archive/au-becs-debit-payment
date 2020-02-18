@@ -236,7 +236,7 @@ pre {
   box-sizing: border-box;
   padding: 15px;
   line-height: 1.15;
-  position: absolute;
+  position: fixed;
   bottom: 2vh;
   left: 0;
   right: 0;
