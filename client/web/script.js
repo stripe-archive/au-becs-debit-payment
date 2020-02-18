@@ -60,9 +60,23 @@ const setupElements = function() {
   // Custom styling can be passed to options when creating an Element
   const style = {
     base: {
-      // Add your base input styles here. For example:
-      fontSize: "16px",
-      color: "#32325d"
+      color: '#32325d',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+      fontSmoothing: 'antialiased',
+      fontSize: '16px',
+      '::placeholder': {
+        color: '#aab7c4'
+      },
+      ':-webkit-autofill': {
+        color: '#32325d',
+      },
+    },
+    invalid: {
+      color: '#fa755a',
+      iconColor: '#fa755a',
+      ':-webkit-autofill': {
+        color: '#fa755a',
+      },
     }
   };
 
