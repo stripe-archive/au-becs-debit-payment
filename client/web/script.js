@@ -14,7 +14,7 @@ fetch("/config")
     cart = data.cart;
     // Show formatted price information.
     const price = (cart.amount / 100).toFixed(2);
-    const numberFormat = new Intl.NumberFormat(["en-US"], {
+    const numberFormat = new Intl.NumberFormat(["en-AU"], {
       style: "currency",
       currency: cart.currency,
       currencyDisplay: "symbol"
