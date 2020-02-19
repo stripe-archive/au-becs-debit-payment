@@ -60,9 +60,24 @@ const setupElements = function() {
   // Custom styling can be passed to options when creating an Element
   const style = {
     base: {
-      // Add your base input styles here. For example:
+      color: "#32325d",
+      fontFamily:
+        '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+      fontSmoothing: "antialiased",
       fontSize: "16px",
-      color: "#32325d"
+      "::placeholder": {
+        color: "#aab7c4"
+      },
+      ":-webkit-autofill": {
+        color: "#32325d"
+      }
+    },
+    invalid: {
+      color: "#fa755a",
+      iconColor: "#fa755a",
+      ":-webkit-autofill": {
+        color: "#fa755a"
+      }
     }
   };
 
@@ -81,9 +96,19 @@ const setupElements = function() {
   auBankAccount.mount("#au-bank-account-element");
 
   auBankAccount.on("change", function(event) {
-    document.getElementById("bank-name").textContent = event.bankName
-      ? `(${event.bankName})`
-      : "";
+    // Reset error state
+    document.getElementById("error-message").classList.remove("visible");
+    // Display bank name corresponding to auBankAccount, if available.
+    const bankName = document.getElementById("bank-name");
+    if (event.bankName && event.branchName) {
+      bankName.textContent = `${event.bankName} (${event.branchName})`;
+      bankName.classList.add("visible");
+    } else if (event.bankName) {
+      bankName.textContent = `${event.bankName}`;
+      bankName.classList.add("visible");
+    } else {
+      bankName.classList.remove("visible");
+    }
     // Handle real-time validation errors from the Element.
     if (event.error) {
       showError(event.error.message);
@@ -148,9 +173,7 @@ const showError = function(errorMsgText) {
   changeLoadingState(false);
   const errorMsg = document.querySelector("#error-message");
   errorMsg.textContent = errorMsgText;
-  setTimeout(function() {
-    errorMsg.textContent = "";
-  }, 4000);
+  errorMsg.classList.add("visible");
 };
 
 // Show a spinner on payment submission
