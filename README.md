@@ -10,7 +10,7 @@ See a [hosted version](https://v0n15.sse.codesandbox.io/) of the sample or fork 
 
 All the samples run in test mode -- use on of the test account numbers from the [doc](https://stripe.com/docs/payments/au-becs-debit/accept-a-payment#test-integration).
 
-<img src="./au-becs-debit-payment.gif" alt="Collecting a BECS Debit mandate and payment" align="center">
+<img src="https://raw.githubusercontent.com/stripe-samples/au-becs-debit-payment/master/au-becs-debit-payment.gif" alt="Collecting a BECS Debit mandate and payment" align="center">
 
 ## Webhooks
 
