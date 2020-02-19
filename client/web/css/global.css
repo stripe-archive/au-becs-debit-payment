@@ -11,7 +11,8 @@
   --accent-color: rgb(50, 50, 93);
   --link-color: rgb(107, 124, 147);
   --error-color: rgb(250, 117, 90);
-  --body-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --body-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
   --radius: 6px;
   --form-width: 600px;
   --gray-light: #ccc;
@@ -87,7 +88,7 @@ input:focus,
 }
 
 input::placeholder {
-  color: #aab7c4 ;
+  color: #aab7c4;
 }
 
 .sr-result {
@@ -185,7 +186,6 @@ a:active {
   filter: brightness(0.5);
 }
 
-
 /* Code block */
 code,
 pre {
@@ -193,12 +193,10 @@ pre {
   font-size: 12px;
 }
 
-
 /* Stripe Element placeholder */
 .sr-element {
   padding-top: 12px;
 }
-
 
 /* Responsiveness */
 @media (max-width: 720px) {
@@ -231,7 +229,6 @@ pre {
     border-radius: 6px;
   }
 }
-
 
 /* spinner/processing state, errors, animations */
 
@@ -304,7 +301,6 @@ pre {
   }
 }
 
-
 /* Animated form */
 
 .sr-root {
@@ -339,21 +335,19 @@ pre {
   }
 }
 
-
 /* Form element styling */
 
 #bank-name + button {
   margin-top: 12px;
 }
 
-#error-message {
-  margin-top: 12px;
-  text-align: center;
-  color: var(--error-color);
-}
-
 #bank-name {
   margin-top: 8px;
+}
+
+#error-message {
+  margin-top: 12px;
+  color: var(--error-color);
 }
 
 #error-message,
