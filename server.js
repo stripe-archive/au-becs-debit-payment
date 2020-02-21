@@ -21,7 +21,6 @@ const createOrder = items => {
 };
 
 app.use(express.static("./client/web"));
-app.use(express.static(process.env.STATIC_DIR));
 // Use JSON parser for all non-webhook routes
 app.use((req, res, next) => {
   if (req.originalUrl === "/webhook") {
