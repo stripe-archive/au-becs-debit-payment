@@ -34,7 +34,7 @@ cart = {
 def create_order(items):
     # Replace this with your order creation logic.
     # Calculate the order total on the server to prevent
-    # people from directly manipulating the amount on the client.
+    # manipulation of the amount on the client.
     return items
 
 
@@ -47,7 +47,7 @@ def get_checkout_page():
 @app.route('/config', methods=['GET'])
 def get_PUBLISHABLE_KEY():
     return jsonify({
-        'publicKey': os.getenv('STRIPE_PUBLISHABLE_KEY'),
+        'publishableKey': os.getenv('STRIPE_PUBLISHABLE_KEY'),
         'cart': cart
     })
 

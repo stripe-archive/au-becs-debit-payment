@@ -28,16 +28,16 @@ public class Server {
 
     // For demo purposes we're hardcoding the amount and currency here.
     // Replace this with your cart functionality.
-    static Map<String, String> cart  = new HashMap<String, String>() {{
-        put("amount", "1099");
+    static final Map<String, Object> CART = new HashMap<String, Object>() {{
+        put("amount", 1099L);
         put("currency", "AUD");
     }};
 
-    static Map<String, String> createOrder(Map cart) {
+    static Map<String, Object> createOrder(Map<String, Object> items) {
         // Replace this with your order creation logic.
         // Calculate the order total on the server to prevent
-        // people from directly manipulating the amount on the client.
-        return cart;
+        // manipulation of the amount on the client.
+        return items;
     }
 
     static class CreateRequestBody {
@@ -69,10 +69,10 @@ public class Server {
             response.type("application/json");
 
             Map<String, Object> responseData = new HashMap<>();
-            responseData.put("publicKey", dotenv.get("STRIPE_PUBLISHABLE_KEY"));
+            responseData.put("publishableKey", dotenv.get("STRIPE_PUBLISHABLE_KEY"));
             Map<String, Object> nestedParams = new HashMap<>();
-            nestedParams.put("amount", cart.get("amount"));
-            nestedParams.put("currency", cart.get("currency"));
+            nestedParams.put("amount", CART.get("amount"));
+            nestedParams.put("currency", CART.get("currency"));
             responseData.put("cart", nestedParams);
             return gson.toJson(responseData);
         });
@@ -89,12 +89,12 @@ public class Server {
 
             Customer customer = Customer.create(params);
 
-            Long amount = new Long(createOrder(cart).get("amount"));
-            String currency = createOrder(cart).get("currency");
+            Map<String, Object> order = createOrder(CART);
+            
             PaymentIntentCreateParams createParams = new PaymentIntentCreateParams.Builder()
                     .addPaymentMethodType("au_becs_debit")
-                    .setCurrency(currency)
-                    .setAmount(amount)
+                    .setCurrency((String) order.get("currency"))
+                    .setAmount((Long) order.get("amount"))
                     .setCustomer(customer.getId())
                     .setSetupFutureUsage(PaymentIntentCreateParams.SetupFutureUsage.OFF_SESSION)
                     .build();

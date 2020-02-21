@@ -20,7 +20,7 @@ cart = {
 def create_order(items)
   # Replace this with your order creation logic.
   # Calculate the order total on the server to prevent
-  # people from directly manipulating the amount on the client.
+  # manipulation of the amount on the client.
   items
 end
 
@@ -33,7 +33,7 @@ end
 get '/config' do
   content_type 'application/json'
   {
-    publicKey: ENV['STRIPE_PUBLISHABLE_KEY'],
+    publishableKey: ENV['STRIPE_PUBLISHABLE_KEY'],
     cart: cart
   }.to_json
 end

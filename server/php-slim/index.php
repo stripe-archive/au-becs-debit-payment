@@ -24,7 +24,7 @@ function createOrder($items)
 {
   // Replace this with your order creation logic.
   // Calculate the order total on the server to prevent
-  // people from directly manipulating the amount on the client.
+  // manipulation of the amount on the client.
   return $items;
 }
 
@@ -52,7 +52,7 @@ $app->get('/config', function (Request $request, Response $response, array $args
   global $cart;
   $pub_key = getenv('STRIPE_PUBLISHABLE_KEY');
   return $response->withJson([ 
-    'publicKey' => $pub_key, 
+    'publishableKey' => $pub_key, 
     'cart' => $cart
   ]);
 });
