@@ -10,7 +10,7 @@ fetch("/config")
     return result.json();
   })
   .then(function(data) {
-    stripe = Stripe(data.publicKey, { betas: ["au_bank_account_beta_2"] });
+    stripe = Stripe(data.publishableKey, { betas: ["au_bank_account_beta_2"] });
     cart = data.cart;
     // Show formatted price information.
     const price = (cart.amount / 100).toFixed(2);

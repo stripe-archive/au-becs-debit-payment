@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const { resolve } = require("path");
+const bodyParser = require("body-parser");
 // Replace if using a different env file or config
 require("dotenv").config({ path: "./.env" });
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
@@ -15,26 +16,24 @@ const cart = {
 const createOrder = items => {
   // Replace this with your order creation logic.
   // Calculate the order total on the server to prevent
-  // people from directly manipulating the amount on the client.
+  // manipulation of the amount on the client.
   return items;
 };
 
 app.use(express.static("./client/web"));
-app.use(
-  express.json({
-    // We need the raw body to verify webhook signatures.
-    // Let's compute it only when hitting the Stripe webhook endpoint.
-    verify: function(req, res, buf) {
-      if (req.originalUrl.startsWith("/webhook")) {
-        req.rawBody = buf.toString();
-      }
-    }
-  })
-);
+app.use(express.static(process.env.STATIC_DIR));
+// Use JSON parser for all non-webhook routes
+app.use((req, res, next) => {
+  if (req.originalUrl === "/webhook") {
+    next();
+  } else {
+    bodyParser.json()(req, res, next);
+  }
+});
 
 app.get("/config", (req, res) => {
   res.send({
-    publicKey: process.env.STRIPE_PUBLISHABLE_KEY,
+    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
     cart
   });
 });
@@ -73,42 +72,34 @@ app.post("/create-payment-intent", async (req, res) => {
 // Expose a endpoint as a webhook handler for asynchronous events.
 // Configure your webhook in the stripe developer dashboard
 // https://dashboard.stripe.com/test/webhooks
-app.post("/webhook", async (req, res) => {
-  let data, eventType;
-
-  // Check if webhook signing is configured.
-  if (process.env.STRIPE_WEBHOOK_SECRET) {
-    // Retrieve the event by verifying the signature using the raw body and secret.
+app.post(
+  "/webhook",
+  bodyParser.raw({ type: "application/json" }),
+  async (req, res) => {
     let event;
-    let signature = req.headers["stripe-signature"];
+
     try {
       event = stripe.webhooks.constructEvent(
-        req.rawBody,
-        signature,
+        req.body,
+        req.headers["stripe-signature"],
         process.env.STRIPE_WEBHOOK_SECRET
       );
     } catch (err) {
-      console.log(`⚠️  Webhook signature verification failed.`);
-      return res.sendStatus(400);
+      // On error, log and return the error message
+      console.log(`❌ Error message: ${err.message}`);
+      return res.status(400).send(`Webhook Error: ${err.message}`);
     }
-    data = event.data;
-    eventType = event.type;
-  } else {
-    // Webhook signing is recommended, but if the secret is not configured in `config.js`,
-    // we can retrieve the event data directly from the request body.
-    data = req.body.data;
-    eventType = req.body.type;
-  }
 
-  if (eventType === "payment_intent.succeeded") {
-    // Funds have been captured
-    // Fulfill any orders, e-mail receipts, etc
-    // To cancel the payment you will need to issue a Refund (https://stripe.com/docs/api/refunds)
-    console.log("💰 Payment received!");
-  } else if (eventType === "payment_intent.payment_failed") {
-    console.log("❌ Payment failed.");
+    if (event.type === "payment_intent.succeeded") {
+      // Funds have been captured
+      // Fulfill any orders, e-mail receipts, etc
+      // To cancel the payment you will need to issue a Refund (https://stripe.com/docs/api/refunds)
+      console.log("💰 Payment received!");
+    } else if (event.type === "payment_intent.payment_failed") {
+      console.log("❌ Payment failed.");
+    }
+    res.sendStatus(200);
   }
-  res.sendStatus(200);
-});
+);
 
 app.listen(4242, () => console.log(`Node server listening on port ${4242}!`));
