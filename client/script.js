@@ -2,9 +2,6 @@
 let stripe;
 let cart;
 
-// Disable the button until we have Stripe set up on the page
-document.querySelector("button").disabled = true;
-
 fetch("/config")
   .then(function(result) {
     return result.json();
@@ -112,11 +109,6 @@ const setupElements = function() {
     // Handle real-time validation errors from the Element.
     if (event.error) {
       showError(event.error.message);
-    } else if (event.complete) {
-      // Enable button.
-      document.querySelector("button").disabled = false;
-    } else {
-      document.querySelector("button").disabled = true;
     }
   });
 
@@ -183,7 +175,7 @@ const changeLoadingState = function(isLoading) {
     document.querySelector("#spinner").classList.remove("hidden");
     document.querySelector("#button-text").classList.add("hidden");
   } else {
-    document.querySelector("button").disabled = true;
+    document.querySelector("button").disabled = false;
     document.querySelector("#spinner").classList.add("hidden");
     document.querySelector("#button-text").classList.remove("hidden");
   }
