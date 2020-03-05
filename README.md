@@ -2,7 +2,9 @@
 
 Stripe users in Australia can accept [BECS Direct Debit payments](https://stripe.com/docs/payments/au-becs-debit) from customers with an Australian bank account.
 
-During the payment process, [a PaymentIntent object is created](https://stripe.com/docs/payments/au-becs-debit/accept-a-payment#create-payment-intent) and a recurring Direct Debit Request mandate is generated and the debit is initiated. BECS Direct Debit is a pull-based, asynchronous method of payment. It takes up to 3 business days to confirm the success or failure of a payment. [Listen to webhooks](https://stripe.com/docs/payments/au-becs-debit/accept-a-payment#confirm-success) to be notified of payment status changes.
+As part of their payment confirmations, businesses must collect a mandate, called Direct Debit Request (DDR): customers need to provide their bank account details—consisting of the account holder’s name, the Bank-State-Branch (BSB) number, and the bank account number—and accept the DDR Service Agreement. This gives the business an authorization to debit the account. Stripe is able to generate this mandate for businesses to present to their customers.
+
+In the sample provided, [a PaymentIntent object is created](https://stripe.com/docs/payments/au-becs-debit/accept-a-payment#create-payment-intent) to be confirmed during checkout, upon which a recurring Direct Debit Request mandate is generated and the debit is initiated. Webhooks are used to get notified of [payment status changes](https://stripe.com/docs/payments/au-becs-debit/accept-a-payment#confirm-success).
 
 ## Demo
 
