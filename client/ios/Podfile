@@ -1,0 +1,24 @@
+platform :ios, '11.0'
+
+workspace 'app.xcworkspace'
+
+target 'BECS Debit Example (Swift)' do
+  project 'BECS Debit Example (Swift)/BECS Debit Example (Swift).xcodeproj'
+
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Sample
+  pod 'Stripe', path: '/Users/csabol/stripe/stripe-ios'
+end
+
+target 'BECS Debit Example (ObjC)' do
+  project 'BECS Debit Example (ObjC)/BECS Debit Example (ObjC).xcodeproj'
+
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Sample
+  pod 'Stripe', path: '/Users/csabol/stripe/stripe-ios'
+end
+
