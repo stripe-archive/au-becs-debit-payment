@@ -9,7 +9,7 @@ target 'BECS Debit Example (Swift)' do
   use_frameworks!
 
   # Pods for Sample
-  pod 'Stripe', path: '/Users/csabol/stripe/stripe-ios'
+  pod 'Stripe', :git => 'https://github.com/stripe/stripe-ios.git', :commit => 'a14410f'
 end
 
 target 'BECS Debit Example (ObjC)' do
@@ -19,6 +19,6 @@ target 'BECS Debit Example (ObjC)' do
   use_frameworks!
 
   # Pods for Sample
-  pod 'Stripe', path: '/Users/csabol/stripe/stripe-ios'
+  pod 'Stripe', :git => 'https://github.com/stripe/stripe-ios.git', :commit => 'a14410f'
 end
 
