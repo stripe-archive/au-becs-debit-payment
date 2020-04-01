@@ -1,0 +1,2 @@
+rootProject.name='Android BECS Debit Example'
+include ':app'
