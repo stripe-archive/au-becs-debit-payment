@@ -1,0 +1,405 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3689ACBF2429627A00F3CC2F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3689ACBE2429627A00F3CC2F /* AppDelegate.m */; };
+		3689ACC22429627A00F3CC2F /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3689ACC12429627A00F3CC2F /* SceneDelegate.m */; };
+		3689ACCA2429627B00F3CC2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3689ACC92429627B00F3CC2F /* Assets.xcassets */; };
+		3689ACCD2429627B00F3CC2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3689ACCB2429627B00F3CC2F /* LaunchScreen.storyboard */; };
+		3689ACD02429627B00F3CC2F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3689ACCF2429627B00F3CC2F /* main.m */; };
+		36C12CB6242D517600E1D475 /* CheckoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C12CB5242D517600E1D475 /* CheckoutViewController.m */; };
+		FF740404AC827C552DF4613D /* Pods_BECS_Debit_Example__ObjC_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F34EF8BC1C0B721BCDB1845 /* Pods_BECS_Debit_Example__ObjC_.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3689ACBA2429627A00F3CC2F /* BECS Debit Example (ObjC).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BECS Debit Example (ObjC).app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3689ACBD2429627A00F3CC2F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3689ACBE2429627A00F3CC2F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3689ACC02429627A00F3CC2F /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		3689ACC12429627A00F3CC2F /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		3689ACC92429627B00F3CC2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3689ACCC2429627B00F3CC2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3689ACCE2429627B00F3CC2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3689ACCF2429627B00F3CC2F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		36C12CB4242D517600E1D475 /* CheckoutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckoutViewController.h; sourceTree = "<group>"; };
+		36C12CB5242D517600E1D475 /* CheckoutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheckoutViewController.m; sourceTree = "<group>"; };
+		3733D93C0408FBCA06086961 /* Pods-BECS Debit Example (ObjC).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BECS Debit Example (ObjC).debug.xcconfig"; path = "Target Support Files/Pods-BECS Debit Example (ObjC)/Pods-BECS Debit Example (ObjC).debug.xcconfig"; sourceTree = "<group>"; };
+		5F34EF8BC1C0B721BCDB1845 /* Pods_BECS_Debit_Example__ObjC_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BECS_Debit_Example__ObjC_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7137F4B4231DDAF047AFC854 /* Pods-BECS Debit Example (ObjC).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BECS Debit Example (ObjC).release.xcconfig"; path = "Target Support Files/Pods-BECS Debit Example (ObjC)/Pods-BECS Debit Example (ObjC).release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3689ACB72429627A00F3CC2F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF740404AC827C552DF4613D /* Pods_BECS_Debit_Example__ObjC_.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3689ACB12429627A00F3CC2F = {
+			isa = PBXGroup;
+			children = (
+				3689ACBC2429627A00F3CC2F /* BECS Debit Example (ObjC) */,
+				3689ACBB2429627A00F3CC2F /* Products */,
+				5F4E5C2B74C332025AEBCC13 /* Pods */,
+				BF8F856046F3426BE1C56D56 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		3689ACBB2429627A00F3CC2F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3689ACBA2429627A00F3CC2F /* BECS Debit Example (ObjC).app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3689ACBC2429627A00F3CC2F /* BECS Debit Example (ObjC) */ = {
+			isa = PBXGroup;
+			children = (
+				3689ACBD2429627A00F3CC2F /* AppDelegate.h */,
+				3689ACBE2429627A00F3CC2F /* AppDelegate.m */,
+				3689ACC92429627B00F3CC2F /* Assets.xcassets */,
+				36C12CB4242D517600E1D475 /* CheckoutViewController.h */,
+				36C12CB5242D517600E1D475 /* CheckoutViewController.m */,
+				3689ACCE2429627B00F3CC2F /* Info.plist */,
+				3689ACCB2429627B00F3CC2F /* LaunchScreen.storyboard */,
+				3689ACCF2429627B00F3CC2F /* main.m */,
+				3689ACC02429627A00F3CC2F /* SceneDelegate.h */,
+				3689ACC12429627A00F3CC2F /* SceneDelegate.m */,
+			);
+			path = "BECS Debit Example (ObjC)";
+			sourceTree = "<group>";
+		};
+		5F4E5C2B74C332025AEBCC13 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3733D93C0408FBCA06086961 /* Pods-BECS Debit Example (ObjC).debug.xcconfig */,
+				7137F4B4231DDAF047AFC854 /* Pods-BECS Debit Example (ObjC).release.xcconfig */,
+			);
+			name = Pods;
+			path = ../Pods;
+			sourceTree = "<group>";
+		};
+		BF8F856046F3426BE1C56D56 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5F34EF8BC1C0B721BCDB1845 /* Pods_BECS_Debit_Example__ObjC_.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3689ACB92429627A00F3CC2F /* BECS Debit Example (ObjC) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3689ACD32429627B00F3CC2F /* Build configuration list for PBXNativeTarget "BECS Debit Example (ObjC)" */;
+			buildPhases = (
+				3E9F40411DC0E71B61987E85 /* [CP] Check Pods Manifest.lock */,
+				3689ACB62429627A00F3CC2F /* Sources */,
+				3689ACB72429627A00F3CC2F /* Frameworks */,
+				3689ACB82429627A00F3CC2F /* Resources */,
+				5DF78B0B011FFCFE318C95D3 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "BECS Debit Example (ObjC)";
+			productName = "BECS Debit Example (ObjC)";
+			productReference = 3689ACBA2429627A00F3CC2F /* BECS Debit Example (ObjC).app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3689ACB22429627A00F3CC2F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = Stripe;
+				TargetAttributes = {
+					3689ACB92429627A00F3CC2F = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 3689ACB52429627A00F3CC2F /* Build configuration list for PBXProject "BECS Debit Example (ObjC)" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3689ACB12429627A00F3CC2F;
+			productRefGroup = 3689ACBB2429627A00F3CC2F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3689ACB92429627A00F3CC2F /* BECS Debit Example (ObjC) */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3689ACB82429627A00F3CC2F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3689ACCD2429627B00F3CC2F /* LaunchScreen.storyboard in Resources */,
+				3689ACCA2429627B00F3CC2F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3E9F40411DC0E71B61987E85 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BECS Debit Example (ObjC)-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5DF78B0B011FFCFE318C95D3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BECS Debit Example (ObjC)/Pods-BECS Debit Example (ObjC)-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BECS Debit Example (ObjC)/Pods-BECS Debit Example (ObjC)-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BECS Debit Example (ObjC)/Pods-BECS Debit Example (ObjC)-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3689ACB62429627A00F3CC2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				36C12CB6242D517600E1D475 /* CheckoutViewController.m in Sources */,
+				3689ACBF2429627A00F3CC2F /* AppDelegate.m in Sources */,
+				3689ACD02429627B00F3CC2F /* main.m in Sources */,
+				3689ACC22429627A00F3CC2F /* SceneDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3689ACCB2429627B00F3CC2F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3689ACCC2429627B00F3CC2F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3689ACD12429627B00F3CC2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		3689ACD22429627B00F3CC2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3689ACD42429627B00F3CC2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3733D93C0408FBCA06086961 /* Pods-BECS Debit Example (ObjC).debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y28TH9SHX7;
+				INFOPLIST_FILE = "BECS Debit Example (ObjC)/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "stripe.BECS-Debit-Example--ObjC-";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3689ACD52429627B00F3CC2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7137F4B4231DDAF047AFC854 /* Pods-BECS Debit Example (ObjC).release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y28TH9SHX7;
+				INFOPLIST_FILE = "BECS Debit Example (ObjC)/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "stripe.BECS-Debit-Example--ObjC-";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3689ACB52429627A00F3CC2F /* Build configuration list for PBXProject "BECS Debit Example (ObjC)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3689ACD12429627B00F3CC2F /* Debug */,
+				3689ACD22429627B00F3CC2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3689ACD32429627B00F3CC2F /* Build configuration list for PBXNativeTarget "BECS Debit Example (ObjC)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3689ACD42429627B00F3CC2F /* Debug */,
+				3689ACD52429627B00F3CC2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3689ACB22429627A00F3CC2F /* Project object */;
+}
