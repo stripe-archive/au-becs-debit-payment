@@ -37,7 +37,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.stripe:stripe-android:14.3.0'
+    implementation 'com.stripe:stripe-android:14.4.1'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -47,6 +47,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.2.0"
 
     // OkHttp & GSON
-    implementation 'com.squareup.okhttp3:okhttp:4.5.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.7.0'
     implementation 'com.google.code.gson:gson:2.8.6'
 }
