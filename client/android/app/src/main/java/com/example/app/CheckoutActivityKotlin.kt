@@ -8,7 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import com.example.app.databinding.CheckoutActivityBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.stripe.android.*
+import com.stripe.android.PaymentIntentResult
+import com.stripe.android.Stripe
+import com.stripe.android.StripeIntentResult
+import com.stripe.android.getPaymentIntentResult
 import com.stripe.android.model.ConfirmPaymentIntentParams
 import com.stripe.android.model.PaymentMethodCreateParams
 import com.stripe.android.view.BecsDebitWidget
