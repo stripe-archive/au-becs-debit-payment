@@ -8,13 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import com.example.app.databinding.CheckoutActivityBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.stripe.android.ApiResultCallback
 import com.stripe.android.PaymentIntentResult
 import com.stripe.android.Stripe
 import com.stripe.android.StripeIntentResult
+import com.stripe.android.getPaymentIntentResult
 import com.stripe.android.model.ConfirmPaymentIntentParams
 import com.stripe.android.model.PaymentMethodCreateParams
 import com.stripe.android.view.BecsDebitWidget
+import kotlinx.coroutines.launch
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -226,16 +227,22 @@ class CheckoutActivityKotlin : AppCompatActivity() {
             data: Intent?
         ): LiveData<PaymentResult> {
             val liveData = MutableLiveData<PaymentResult>()
-            stripe?.onPaymentResult(requestCode, data,
-                callback = object : ApiResultCallback<PaymentIntentResult> {
-                    override fun onError(e: Exception) {
-                        liveData.value = PaymentResult.Error(e)
+            stripe?.let { stripe ->
+                if (stripe.isPaymentResult(requestCode, data)) {
+                    viewModelScope.launch {
+                        liveData.value = runCatching {
+                            stripe.getPaymentIntentResult(requestCode, data!!)
+                        }.fold(
+                            onSuccess = {
+                                PaymentResult.Success(it)
+                            },
+                            onFailure = {
+                                PaymentResult.Error(it as Exception)
+                            }
+                        )
                     }
-
-                    override fun onSuccess(result: PaymentIntentResult) {
-                        liveData.value = PaymentResult.Success(result)
-                    }
-                })
+                }
+            }
             return liveData
         }
 
